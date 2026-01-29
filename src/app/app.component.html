@@ -1,0 +1,41 @@
+<div class="container">
+  <div class="header">
+    <h1>Random User Generator</h1>
+    <button (click)="fetchRandomUser()" [disabled]="loading" class="fetch-btn">
+      {{ loading ? 'Loading...' : 'Fetch Random User' }}
+    </button>
+  </div>
+
+  <div *ngIf="error" class="error-message">
+    {{ error }}
+  </div>
+
+  <div *ngIf="user" class="user-card">
+    <div class="user-image">
+      <img [src]="user.picture.large" [alt]="user.name.first + ' ' + user.name.last">
+    </div>
+    
+    <div class="user-info">
+      <h2>{{ user.name.first }} {{ user.name.last }}</h2>
+      
+      <div class="info-group">
+        <label>Email:</label>
+        <p>{{ user.email }}</p>
+      </div>
+      
+      <div class="info-group">
+        <label>Phone:</label>
+        <p>{{ user.phone }}</p>
+      </div>
+      
+      <div class="info-group">
+        <label>Location:</label>
+        <p>{{ user.location.city }}, {{ user.location.state }}, {{ user.location.country }}</p>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="!user && !loading && !error" class="empty-state">
+    <p>Click the button above to fetch a random user!</p>
+  </div>
+</div>
